@@ -66,7 +66,8 @@
                 Click="OpenFileButtonClicked"
                 Content="&#xE8E5;"
                 Style="{StaticResource TitleBarButtonStyle}"
-                Tag="{x:Bind LeftPanelDiff}" />
+                Tag="{x:Bind LeftPanelDiff}"
+                ToolTipService.ToolTip="Open file 1" />
 
         <!--  CHANGE VIEW BUTTON  -->
         <Button x:Name="viewChangeButton"
@@ -75,7 +76,8 @@
                 HorizontalAlignment="Right"
                 Click="PanelChangeButtonClick"
                 Content="&#xEA61;"
-                Style="{StaticResource TitleBarButtonStyle}" />
+                Style="{StaticResource TitleBarButtonStyle}"
+                ToolTipService.ToolTip="Change view" />
 
         <!--  OPEN FILE 2 BUTTON  -->
         <Button Grid.Row="0"
@@ -83,7 +85,8 @@
                 Click="OpenFileButtonClicked"
                 Content="&#xE8E5;"
                 Style="{StaticResource TitleBarButtonStyle}"
-                Tag="{x:Bind RightPanelDiff}" />
+                Tag="{x:Bind RightPanelDiff}"
+                ToolTipService.ToolTip="Open file 2" />
         <!--#endregion-->
 
         <!--#region FILE NAME-->

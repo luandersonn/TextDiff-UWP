@@ -1,14 +1,165 @@
-﻿<Page
-    x:Class="TextDiff_UWP.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:TextDiff_UWP"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<Page x:Class="TextDiff_UWP.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:textdiff_uwp="using:TextDiff_UWP"
+      mc:Ignorable="d">
 
-    <Grid>
+    <Page.Resources>
+        <Style x:Key="TitleBarButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="45" />
+            <Setter Property="Margin" Value="10,0" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemBaseLowColor}" />
+            <Setter Property="Canvas.ZIndex" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Background" Value="{ThemeResource PageBackgroundColor}" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        </Style>
+        <Style x:Key="FileTitleTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Padding" Value="120,0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="Canvas.ZIndex" Value="2" />
+        </Style>
+
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource PageBackgroundColor}">
+        <!--#region MAIN GRID PROPERTIES-->
+        <Grid.BackgroundTransition>
+            <BrushTransition />
+        </Grid.BackgroundTransition>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+
+        <!--#region TITLEBAR-->
+        <Border Grid.ColumnSpan="2"
+                Background="{ThemeResource TitleBarBackgroundAcrylicBrush}"
+                Canvas.ZIndex="1"
+                Loaded="TitleBarLoaded">
+            <Border.BackgroundTransition>
+                <BrushTransition />
+            </Border.BackgroundTransition>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region  TITLE BAR BUTTONS-->
+
+        <!--  OPEN FILE 1 BUTTON  -->
+        <Button Grid.Row="0"
+                Grid.Column="0"
+                Click="OpenFileButtonClicked"
+                Content="&#xE8E5;"
+                Style="{StaticResource TitleBarButtonStyle}"
+                Tag="{x:Bind LeftPanelDiff}" />
+
+        <!--  CHANGE VIEW BUTTON  -->
+        <Button x:Name="viewChangeButton"
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Click="PanelChangeButtonClick"
+                Content="&#xEA61;"
+                Style="{StaticResource TitleBarButtonStyle}" />
+
+        <!--  OPEN FILE 2 BUTTON  -->
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Click="OpenFileButtonClicked"
+                Content="&#xE8E5;"
+                Style="{StaticResource TitleBarButtonStyle}"
+                Tag="{x:Bind RightPanelDiff}" />
+        <!--#endregion-->
+
+        <!--#region FILE NAME-->
+
+        <!--  File 1  -->
+        <TextBlock Grid.Column="0"
+                   Style="{StaticResource FileTitleTextBlockStyle}"
+                   Text="{x:Bind LeftPanelDiff.File.Name, Mode=OneWay}" />
+
+        <!--  File 2  -->
+        <TextBlock Grid.Column="1"
+                   Style="{StaticResource FileTitleTextBlockStyle}"
+                   Text="{x:Bind RightPanelDiff.File.Name, Mode=OneWay}" />
+        <!--#endregion-->
+
+        <!--#region CONTENT PANELS-->
+        <Pivot x:Name="pivot"
+               Grid.Row="1"
+               Grid.ColumnSpan="2"
+               Margin="0,-48,0,0"
+               SelectionChanged="PivotSelectionChanged">
+            <Pivot.ItemContainerStyle>
+                <Style TargetType="PivotItem">
+                    <Setter Property="Margin" Value="0" />
+                </Style>
+            </Pivot.ItemContainerStyle>
+            <!--#region SPLIT VIEW-->
+            <PivotItem>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="1" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <!--#region LEFT SIDE-->
+                    <textdiff_uwp:DiffPanel x:Name="LeftPanelDiff"
+                                            AllowDrop="True"
+                                            FileChanged="FileChanged"
+                                            Loaded="PanelDiffLoaded"
+                                            Tag="leftPanel" />
+                    <!--#endregion-->
+
+                    <!--#region VERTICAL SEPARATOR LINE-->
+                    <Rectangle Grid.RowSpan="3"
+                               Grid.Column="1"
+                               Width="1"
+                               Canvas.ZIndex="1"
+                               Fill="{ThemeResource SystemBaseLowColor}"
+                               IsHitTestVisible="False" />
+                    <!--#endregion-->
+
+                    <!--#region RIGHT SIDE-->
+                    <textdiff_uwp:DiffPanel x:Name="RightPanelDiff"
+                                            Grid.Column="2"
+                                            AllowDrop="True"
+                                            FileChanged="FileChanged"
+                                            Loaded="PanelDiffLoaded"
+                                            Tag="rightPanel" />
+                    <!--#endregion-->
+
+                </Grid>
+            </PivotItem>
+            <!--#endregion-->
+
+            <!--#region INLINE VIEW-->
+            <PivotItem>
+                <textdiff_uwp:DiffPanel x:Name="InlinePanelDiff"
+                                        AllowDrop="False"
+                                        Loaded="PanelDiffLoaded"
+                                        Tag="inlinePanel" />
+            </PivotItem>
+            <!--#endregion-->
+        </Pivot>
+
+        <!--#endregion-->
 
     </Grid>
 </Page>

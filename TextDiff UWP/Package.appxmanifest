@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="282129d0-cedf-41f3-bde6-67b20518e249"
-    Publisher="CN=luand"
+    Name="1664LuandersonnAirton.TextDiffUWP"
+    Publisher="CN=EEC8C5A1-1CBF-403D-AE97-59CD4F4AAD55"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="282129d0-cedf-41f3-bde6-67b20518e249" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="6066cec9-02b1-4fa9-a729-c1e315d7be92" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>TextDiff UWP</DisplayName>
-    <PublisherDisplayName>luand</PublisherDisplayName>
+    <PublisherDisplayName>Luandersonn Airton</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -35,15 +35,16 @@
         DisplayName="TextDiff UWP"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="TextDiff UWP"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        Description="Super basic text diff tool"
+        BackgroundColor="#2C2C2C">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="Text diff">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
-
-  <Capabilities>
-    <Capability Name="internetClient" />
-  </Capabilities>
 </Package>

@@ -2,4 +2,4 @@
 
 ### Just fun with XAML ;)
 ### Super basic text diff tool
-![](Gif\Captura.gif)
+<img src="https://github.com/luandersonn/TextDiff-UWP/blob/master/Gif/Captura.gif"/>

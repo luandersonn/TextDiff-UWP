@@ -156,6 +156,7 @@
                   SelectionMode="None" />
 
         <Grid x:Name="DragAndDropIconGrid"
+              x:Load="{x:Bind IsDragAndDropPaneLoaded, Mode=OneWay}"
               Background="{ThemeResource PageBackgroundColor}"
               IsHitTestVisible="False"
               Visibility="{x:Bind AllowDrop, Mode=OneWay}">

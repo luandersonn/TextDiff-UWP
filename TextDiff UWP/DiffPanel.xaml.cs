@@ -24,14 +24,31 @@ namespace TextDiff_UWP
 			get => (StorageFile)GetValue(FileProperty);			
 			private set => SetValue(FileProperty, value);
 		}		
-		public static readonly DependencyProperty FileProperty = DependencyProperty.Register("File", typeof(StorageFile), typeof(DiffPanel), new PropertyMetadata(null));
+		public static readonly DependencyProperty FileProperty = 
+			DependencyProperty.Register("File", typeof(StorageFile), typeof(DiffPanel), new PropertyMetadata(null));
 
 		public IEnumerable<DiffPiece> ItemsSource
 		{
 			get { return (IEnumerable<DiffPiece>)GetValue(ItemsSourceProperty); }
 			set { SetValue(ItemsSourceProperty, value); }
 		}		
-		public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable<DiffPiece>), typeof(DiffPanel), new PropertyMetadata(null));
+		public static readonly DependencyProperty ItemsSourceProperty = 
+			DependencyProperty.Register("ItemsSource", typeof(IEnumerable<DiffPiece>), typeof(DiffPanel), new PropertyMetadata(null));
+
+
+
+		public bool IsDragAndDropPaneLoaded
+		{
+			get { return (bool)GetValue(IsDragAndDropPaneLoadedProperty); }
+			set { SetValue(IsDragAndDropPaneLoadedProperty, value); }
+		}
+		
+		public static readonly DependencyProperty IsDragAndDropPaneLoadedProperty =
+			DependencyProperty.Register("IsDragAndDropPaneLoaded", typeof(bool), typeof(DiffPanel), new PropertyMetadata(true));
+
+
+
+
 		#endregion
 
 		public ScrollViewer ScrollViewer { get; private set; }		
@@ -43,7 +60,7 @@ namespace TextDiff_UWP
 				File = file;
 				FileChanged?.Invoke(this, null);
 				if (file != null)
-					DragAndDropIconGrid.Visibility = Visibility.Collapsed;
+					IsDragAndDropPaneLoaded = false;
 			}
 			catch(Exception e)
 			{
@@ -67,18 +84,18 @@ namespace TextDiff_UWP
 		private void OnDragLeave(object sender, DragEventArgs e)
 		{
 			if (File != null)
-				DragAndDropIconGrid.Visibility = Visibility.Collapsed;
+				IsDragAndDropPaneLoaded = false;
 		}
 
 		private void OnDragOver(object sender, DragEventArgs e)
 		{
-			DragAndDropIconGrid.Visibility = Visibility.Visible;
+			IsDragAndDropPaneLoaded = true;
 			e.AcceptedOperation = DataPackageOperation.Link;
 		}
 
 		private async void OnDrop(object sender, DragEventArgs e)
 		{
-			DragAndDropIconGrid.Visibility = Visibility.Collapsed;
+			IsDragAndDropPaneLoaded = false;
 						
 			if (e.DataView.Contains(StandardDataFormats.StorageItems))
 			{

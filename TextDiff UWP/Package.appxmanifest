@@ -9,7 +9,7 @@
   <Identity
     Name="1664LuandersonnAirton.TextDiffUWP"
     Publisher="CN=EEC8C5A1-1CBF-403D-AE97-59CD4F4AAD55"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="6066cec9-02b1-4fa9-a729-c1e315d7be92" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

@@ -1,41 +1,12 @@
 ﻿<Application x:Class="TextDiff_UWP.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:TextDiff_UWP">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-            </ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <Color x:Key="BackgroundColor">White</Color>
-                    <Color x:Key="TitleBarBackgroundColor">#FFDDDAD6</Color>
-                    <Color x:Key="PageBackgroundColor">#FFF6F5F4</Color>
-
-                    <SolidColorBrush x:Key="BackgroundColorBrush" Color="White" />
-                    <SolidColorBrush x:Key="TitleBarBackgroundColorBrush" Color="#FFDDDAD6" />
-                    <SolidColorBrush x:Key="PageBackgroundColorBrush" Color="#FFF6F5F4" />
-                    <AcrylicBrush x:Key="TitleBarBackgroundAcrylicBrush"
-                                  FallbackColor="{StaticResource TitleBarBackgroundColor}"
-                                  TintColor="{StaticResource TitleBarBackgroundColor}"
-                                  TintOpacity="0.7" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <Color x:Key="BackgroundColor">#FF2C2C2C</Color>
-                    <Color x:Key="TitleBarBackgroundColor">#FF282828</Color>
-                    <Color x:Key="PageBackgroundColor">#FF353535</Color>
-
-                    <SolidColorBrush x:Key="BackgroundColorBrush" Color="#FF2C2C2C" />
-                    <SolidColorBrush x:Key="TitleBarBackgroundColorBrush" Color="#FF282828" />
-                    <SolidColorBrush x:Key="PageBackgroundColorBrush" Color="#FF353535" />
-
-                    <AcrylicBrush x:Key="TitleBarBackgroundAcrylicBrush"
-                                  FallbackColor="{StaticResource TitleBarBackgroundColor}"
-                                  TintColor="{StaticResource TitleBarBackgroundColor}"
-                                  TintOpacity="0.7" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:local="using:TextDiff_UWP">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>

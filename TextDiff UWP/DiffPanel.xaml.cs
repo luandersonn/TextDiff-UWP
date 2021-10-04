@@ -21,18 +21,18 @@ namespace TextDiff_UWP
 		#region Dependency Properties		
 		public StorageFile File
 		{
-			get => (StorageFile)GetValue(FileProperty);			
+			get => (StorageFile)GetValue(FileProperty);
 			private set => SetValue(FileProperty, value);
-		}		
-		public static readonly DependencyProperty FileProperty = 
+		}
+		public static readonly DependencyProperty FileProperty =
 			DependencyProperty.Register("File", typeof(StorageFile), typeof(DiffPanel), new PropertyMetadata(null));
 
 		public IEnumerable<DiffPiece> ItemsSource
 		{
 			get { return (IEnumerable<DiffPiece>)GetValue(ItemsSourceProperty); }
 			set { SetValue(ItemsSourceProperty, value); }
-		}		
-		public static readonly DependencyProperty ItemsSourceProperty = 
+		}
+		public static readonly DependencyProperty ItemsSourceProperty =
 			DependencyProperty.Register("ItemsSource", typeof(IEnumerable<DiffPiece>), typeof(DiffPanel), new PropertyMetadata(null));
 
 
@@ -42,7 +42,7 @@ namespace TextDiff_UWP
 			get { return (bool)GetValue(IsDragAndDropPaneLoadedProperty); }
 			set { SetValue(IsDragAndDropPaneLoadedProperty, value); }
 		}
-		
+
 		public static readonly DependencyProperty IsDragAndDropPaneLoadedProperty =
 			DependencyProperty.Register("IsDragAndDropPaneLoaded", typeof(bool), typeof(DiffPanel), new PropertyMetadata(true));
 
@@ -51,18 +51,22 @@ namespace TextDiff_UWP
 
 		#endregion
 
-		public ScrollViewer ScrollViewer { get; private set; }		
+		public ScrollViewer ScrollViewer { get; private set; }
 		public async Task SetFileAsync(StorageFile file)
 		{
 			try
 			{
-				ItemsSource = (await FileIO.ReadLinesAsync(file)).Select((item, index) => new DiffPiece(item, ChangeType.Unchanged, index + 1));
+				var value = await Helpers.DiffHelper.ReadTextAsync(file);
+
+				ItemsSource = value.Split(Environment.NewLine, options: StringSplitOptions.None)
+									.Select((line, index) => new DiffPiece(line, ChangeType.Unchanged, index + 1));
+
 				File = file;
 				FileChanged?.Invoke(this, null);
 				if (file != null)
 					IsDragAndDropPaneLoaded = false;
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				await new ContentDialog
 				{
@@ -72,7 +76,7 @@ namespace TextDiff_UWP
 				}.ShowAsync();
 			}
 		}
-		
+
 		#region event handlers		
 		private void ListViewLoaded(object sender, RoutedEventArgs e)
 		{
@@ -96,14 +100,14 @@ namespace TextDiff_UWP
 		private async void OnDrop(object sender, DragEventArgs e)
 		{
 			IsDragAndDropPaneLoaded = false;
-						
+
 			if (e.DataView.Contains(StandardDataFormats.StorageItems))
 			{
 				var items = await e.DataView.GetStorageItemsAsync();
 				if (items.Count > 0)
 					await SetFileAsync((StorageFile)items[0]);
-				
-			}			
+
+			}
 		}
 		#endregion
 	}

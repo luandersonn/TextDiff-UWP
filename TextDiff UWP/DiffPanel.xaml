@@ -1,189 +1,187 @@
 ﻿<UserControl x:Class="TextDiff_UWP.DiffPanel"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:helpers="using:TextDiff_UWP.Helpers"
-             xmlns:local="using:TextDiff_UWP"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:model="using:DiffPlex.DiffBuilder.Model"
-             d:DesignHeight="300"
-             d:DesignWidth="400"
-             Background="Transparent"
-             DragLeave="OnDragLeave"
-             DragOver="OnDragOver"
-             Drop="OnDrop"
-             mc:Ignorable="d">
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:helpers="using:TextDiff_UWP.Helpers"
+			 xmlns:local="using:TextDiff_UWP"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:model="using:DiffPlex.DiffBuilder.Model"
+			 d:DesignHeight="300"
+			 d:DesignWidth="400"
+			 Background="Transparent"
+			 DragLeave="OnDragLeave"
+			 DragOver="OnDragOver"
+			 Drop="OnDrop"
+			 mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <DataTemplate x:Key="InsertedDataTemplate" x:DataType="model:DiffPiece">
-            <Grid Background="#CC1E6C1E">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Border Background="{ThemeResource SystemAltMediumColor}"
-                        BorderBrush="{ThemeResource SystemBaseLowColor}"
-                        BorderThickness="0,0,0,0.5">
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Text="{x:Bind Position, TargetNullValue=''}" />
-                </Border>
+	<UserControl.Resources>
+		<DataTemplate x:Key="InsertedDataTemplate" x:DataType="model:DiffPiece">
+			<Grid Background="#CC1E6C1E">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="40" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Border Background="{ThemeResource SystemAltMediumColor}"
+						BorderBrush="{ThemeResource SystemBaseLowColor}"
+						BorderThickness="0,0,0,0.5">
+					<TextBlock HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Text="{x:Bind Position, TargetNullValue=''}" />
+				</Border>
 
-                <RichTextBlock Grid.Column="1"
-                               Margin="10"
-                               VerticalAlignment="Center">
-                    <Paragraph>
-                        <Run FontFamily="Consolas"
-                             FontSize="15"
-                             Text="{x:Bind Text}" />
-                    </Paragraph>
-                </RichTextBlock>
-            </Grid>
-        </DataTemplate>
+				<RichTextBlock Grid.Column="1"
+							   Margin="10"
+							   VerticalAlignment="Center">
+					<Paragraph>
+						<Run FontFamily="Consolas"
+							 FontSize="15"
+							 Text="{x:Bind Text}" />
+					</Paragraph>
+				</RichTextBlock>
+			</Grid>
+		</DataTemplate>
 
-        <DataTemplate x:Key="DeletedDataTemplate" x:DataType="model:DiffPiece">
-            <Grid Background="#B2CF0808">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Border Background="{ThemeResource SystemAltMediumColor}"
-                        BorderBrush="{ThemeResource SystemBaseLowColor}"
-                        BorderThickness="0,0,0,0.5">
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Text="{x:Bind Position, TargetNullValue=''}" />
-                </Border>
-                <RichTextBlock Grid.Column="1"
-                               Margin="10"
-                               VerticalAlignment="Center">
-                    <Paragraph>
-                        <Run FontFamily="Consolas"
-                             FontSize="15"
-                             Text="{x:Bind Text}" />
-                    </Paragraph>
-                </RichTextBlock>
-            </Grid>
-        </DataTemplate>
+		<DataTemplate x:Key="DeletedDataTemplate" x:DataType="model:DiffPiece">
+			<Grid Background="#B2CF0808">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="40" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Border Background="{ThemeResource SystemAltMediumColor}"
+						BorderBrush="{ThemeResource SystemBaseLowColor}"
+						BorderThickness="0,0,0,0.5">
+					<TextBlock HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Text="{x:Bind Position, TargetNullValue=''}" />
+				</Border>
+				<RichTextBlock Grid.Column="1"
+							   Margin="10"
+							   VerticalAlignment="Center">
+					<Paragraph>
+						<Run FontFamily="Consolas"
+							 FontSize="15"
+							 Text="{x:Bind Text}" />
+					</Paragraph>
+				</RichTextBlock>
+			</Grid>
+		</DataTemplate>
 
-        <DataTemplate x:Key="ModifiedDataTemplate" x:DataType="model:DiffPiece">
-            <Grid Margin="0,-1" Background="#B2EEBF20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Border Background="{ThemeResource SystemAltMediumColor}"
-                        BorderBrush="{ThemeResource SystemBaseLowColor}"
-                        BorderThickness="0,0,0,0.5">
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Text="{x:Bind Position, TargetNullValue=''}" />
-                </Border>
+		<DataTemplate x:Key="ModifiedDataTemplate" x:DataType="model:DiffPiece">
+			<Grid Margin="0,-1" Background="#B2EEBF20">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="40" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Border Background="{ThemeResource SystemAltMediumColor}"
+						BorderBrush="{ThemeResource SystemBaseLowColor}"
+						BorderThickness="0,0,0,0.5">
+					<TextBlock HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Text="{x:Bind Position, TargetNullValue=''}" />
+				</Border>
 
 
-                <RichTextBlock Grid.Column="1"
-                               Margin="10"
-                               VerticalAlignment="Center">
-                    <Paragraph>
-                        <Run FontFamily="Consolas"
-                             FontSize="15"
-                             Text="{x:Bind Text}" />
-                    </Paragraph>
-                </RichTextBlock>
+				<RichTextBlock Grid.Column="1"
+							   Margin="10"
+							   VerticalAlignment="Center">
+					<Paragraph>
+						<Run FontFamily="Consolas"
+							 FontSize="15"
+							 Text="{x:Bind Text}" />
+					</Paragraph>
+				</RichTextBlock>
 
-            </Grid>
-        </DataTemplate>
+			</Grid>
+		</DataTemplate>
 
-        <DataTemplate x:Key="UnchangedDataTemplate" x:DataType="model:DiffPiece">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Border Background="{ThemeResource SystemAltMediumColor}"
-                        BorderBrush="{ThemeResource SystemBaseLowColor}"
-                        BorderThickness="0,0,0,0.5">
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Text="{x:Bind Position, TargetNullValue=''}" />
-                </Border>
+		<DataTemplate x:Key="UnchangedDataTemplate" x:DataType="model:DiffPiece">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="40" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Border Background="{ThemeResource SystemAltMediumColor}"
+						BorderBrush="{ThemeResource SystemBaseLowColor}"
+						BorderThickness="0,0,0,0.5">
+					<TextBlock HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Text="{x:Bind Position, TargetNullValue=''}" />
+				</Border>
 
-                <RichTextBlock Grid.Column="1"
-                               Margin="10"
-                               VerticalAlignment="Center">
-                    <Paragraph>
-                        <Run FontFamily="Consolas"
-                             FontSize="15"
-                             Text="{x:Bind Text}" />
-                    </Paragraph>
-                </RichTextBlock>
+				<RichTextBlock Grid.Column="1"
+							   Margin="10"
+							   VerticalAlignment="Center">
+					<Paragraph>
+						<Run FontFamily="Consolas"
+							 FontSize="15"
+							 Text="{x:Bind Text}" />
+					</Paragraph>
+				</RichTextBlock>
 
-            </Grid>
-        </DataTemplate>
+			</Grid>
+		</DataTemplate>
 
-        <DataTemplate x:Key="DefaultDataTemplate">
-            <Border Background="Transparent">
-                <RichTextBlock VerticalAlignment="Center">
-                    <Paragraph>
-                        <Run FontFamily="Consolas"
-                             FontSize="15"
-                             Text="{Binding}" />
-                    </Paragraph>
-                </RichTextBlock>
-            </Border>
-        </DataTemplate>
+		<DataTemplate x:Key="DefaultDataTemplate">
+			<Border Background="Transparent">
+				<RichTextBlock VerticalAlignment="Center">
+					<Paragraph>
+						<Run FontFamily="Consolas"
+							 FontSize="15"
+							 Text="{Binding}" />
+					</Paragraph>
+				</RichTextBlock>
+			</Border>
+		</DataTemplate>
 
-        <Style TargetType="ListViewItem">
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
+		<Style TargetType="ListViewItem">
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+			<Setter Property="VerticalContentAlignment" Value="Stretch" />
+			<Setter Property="Background" Value="Transparent" />
+		</Style>
 
-        <helpers:FileLineTemplateSelector x:Key="FileTemplateSelector"
-                                          DefaultDataTemplate="{StaticResource DefaultDataTemplate}"
-                                          Deleted="{StaticResource DeletedDataTemplate}"
-                                          Inserted="{StaticResource InsertedDataTemplate}"
-                                          Modified="{StaticResource ModifiedDataTemplate}"
-                                          Unchanged="{StaticResource UnchangedDataTemplate}" />
-    </UserControl.Resources>
+		<helpers:FileLineTemplateSelector x:Key="FileTemplateSelector"
+										  DefaultDataTemplate="{StaticResource DefaultDataTemplate}"
+										  Deleted="{StaticResource DeletedDataTemplate}"
+										  Inserted="{StaticResource InsertedDataTemplate}"
+										  Modified="{StaticResource ModifiedDataTemplate}"
+										  Unchanged="{StaticResource UnchangedDataTemplate}" />
+	</UserControl.Resources>
 
-    <Grid>
-        <ListView x:Name="listview"
-                  ItemTemplateSelector="{StaticResource FileTemplateSelector}"
-                  ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
-                  Loaded="ListViewLoaded"
-                  SelectionMode="None" />
+	<Grid>
+		<ListView x:Name="listview"
+				  ItemTemplateSelector="{StaticResource FileTemplateSelector}"
+				  ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
+				  Loaded="ListViewLoaded"
+				  SelectionMode="None" />
 
-        <Grid x:Name="DragAndDropIconGrid"
-              x:Load="{x:Bind IsDragAndDropPaneLoaded, Mode=OneWay}"
-              Background="{ThemeResource PageBackgroundColor}"
-              IsHitTestVisible="False"
-              Visibility="{x:Bind AllowDrop, Mode=OneWay}">
-            <Grid.BackgroundTransition>
-                <BrushTransition />
-            </Grid.BackgroundTransition>
-            <Rectangle Margin="15"
-                       RadiusX="10"
-                       RadiusY="10"
-                       Stroke="{ThemeResource SystemBaseMediumColor}"
-                       StrokeDashArray="0 5.0 0"
-                       StrokeThickness="2" />
-            <StackPanel MaxWidth="320"
-                        Margin="50,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Spacing="8">
-                <FontIcon FontSize="60"
-                          Foreground="{ThemeResource SystemBaseMediumColor}"
-                          Glyph="&#xE7C3;" />
-                <TextBlock HorizontalAlignment="Center"
-                           FontSize="20"
-                           Foreground="{ThemeResource SystemBaseMediumColor}"
-                           HorizontalTextAlignment="Center"
-                           Text="Drop a text file here"
-                           TextWrapping="Wrap" />
-            </StackPanel>
-        </Grid>
-    </Grid>
+		<Grid x:Name="DragAndDropIconGrid" x:Load="{x:Bind IsDragAndDropPaneLoaded, Mode=OneWay}"
+			  IsHitTestVisible="False"
+			  Visibility="{x:Bind AllowDrop, Mode=OneWay}">
+			<Grid.BackgroundTransition>
+				<BrushTransition />
+			</Grid.BackgroundTransition>
+			<Rectangle Margin="15"
+					   RadiusX="10"
+					   RadiusY="10"
+					   Stroke="{ThemeResource SystemBaseMediumColor}"
+					   StrokeDashArray="0 5.0 0"
+					   StrokeThickness="2" />
+			<StackPanel MaxWidth="320"
+						Margin="50,0"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Spacing="8">
+				<FontIcon FontSize="60"
+						  Foreground="{ThemeResource SystemBaseMediumColor}"
+						  Glyph="&#xE7C3;" />
+				<TextBlock HorizontalAlignment="Center"
+						   FontSize="20"
+						   Foreground="{ThemeResource SystemBaseMediumColor}"
+						   HorizontalTextAlignment="Center"
+						   Text="Drop a text file here"
+						   TextWrapping="Wrap" />
+			</StackPanel>
+		</Grid>
+	</Grid>
 </UserControl>

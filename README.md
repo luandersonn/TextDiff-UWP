@@ -2,6 +2,9 @@
 
 ### Just fun with XAML ;)
 ### Super basic text diff tool
+
+<img src="https://luandersonn.com/images/text-diff-uwp/SplitView - Light.png">
+
 <img src="https://github.com/luandersonn/TextDiff-UWP/blob/main/Images/Captura.gif"/>
 
 [<img src="https://github.com/luandersonn/TextDiff-UWP/blob/main/Images/Get from MS Store English.png"

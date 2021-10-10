@@ -82,7 +82,6 @@ namespace TextDiff_UWP
 		{
 			var border = (Border)VisualTreeHelper.GetChild(listview, 0);
 			ScrollViewer = (ScrollViewer)border.Child;
-			ScrollViewer.CanContentRenderOutsideBounds = true;
 		}
 
 		private void OnDragLeave(object sender, DragEventArgs e)

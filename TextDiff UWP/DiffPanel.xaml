@@ -16,7 +16,7 @@
 
 	<UserControl.Resources>
 		<DataTemplate x:Key="InsertedDataTemplate" x:DataType="model:DiffPiece">
-			<Grid Background="#CC1E6C1E">
+			<Grid Background="#921E6C1E">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="40" />
 					<ColumnDefinition />
@@ -29,20 +29,17 @@
 							   Text="{x:Bind Position, TargetNullValue=''}" />
 				</Border>
 
-				<RichTextBlock Grid.Column="1"
-							   Margin="10"
-							   VerticalAlignment="Center">
-					<Paragraph>
-						<Run FontFamily="Consolas"
-							 FontSize="15"
-							 Text="{x:Bind Text}" />
-					</Paragraph>
-				</RichTextBlock>
+				<TextBlock Grid.Column="1"
+						   Padding="4"
+						   VerticalAlignment="Center"
+						   FontFamily="Consolas"
+						   IsTextSelectionEnabled="True"
+						   Text="{x:Bind Text}" />
 			</Grid>
 		</DataTemplate>
 
 		<DataTemplate x:Key="DeletedDataTemplate" x:DataType="model:DiffPiece">
-			<Grid Background="#B2CF0808">
+			<Grid Background="#92CF0808">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="40" />
 					<ColumnDefinition />
@@ -54,20 +51,17 @@
 							   VerticalAlignment="Center"
 							   Text="{x:Bind Position, TargetNullValue=''}" />
 				</Border>
-				<RichTextBlock Grid.Column="1"
-							   Margin="10"
-							   VerticalAlignment="Center">
-					<Paragraph>
-						<Run FontFamily="Consolas"
-							 FontSize="15"
-							 Text="{x:Bind Text}" />
-					</Paragraph>
-				</RichTextBlock>
+				<TextBlock Grid.Column="1"
+						   Padding="4"
+						   VerticalAlignment="Center"
+						   FontFamily="Consolas"
+						   IsTextSelectionEnabled="True"
+						   Text="{x:Bind Text}" />
 			</Grid>
 		</DataTemplate>
 
 		<DataTemplate x:Key="ModifiedDataTemplate" x:DataType="model:DiffPiece">
-			<Grid Margin="0,-1" Background="#B2EEBF20">
+			<Grid Margin="0,-1" Background="#92EEBF20">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="40" />
 					<ColumnDefinition />
@@ -81,15 +75,12 @@
 				</Border>
 
 
-				<RichTextBlock Grid.Column="1"
-							   Margin="10"
-							   VerticalAlignment="Center">
-					<Paragraph>
-						<Run FontFamily="Consolas"
-							 FontSize="15"
-							 Text="{x:Bind Text}" />
-					</Paragraph>
-				</RichTextBlock>
+				<TextBlock Grid.Column="1"
+						   Padding="4"
+						   VerticalAlignment="Center"
+						   FontFamily="Consolas"
+						   IsTextSelectionEnabled="True"
+						   Text="{x:Bind Text}" />
 
 			</Grid>
 		</DataTemplate>
@@ -108,36 +99,31 @@
 							   Text="{x:Bind Position, TargetNullValue=''}" />
 				</Border>
 
-				<RichTextBlock Grid.Column="1"
-							   Margin="10"
-							   VerticalAlignment="Center">
-					<Paragraph>
-						<Run FontFamily="Consolas"
-							 FontSize="15"
-							 Text="{x:Bind Text}" />
-					</Paragraph>
-				</RichTextBlock>
+				<TextBlock Grid.Column="1"
+						   Padding="4"
+						   VerticalAlignment="Center"
+						   FontFamily="Consolas"
+						   IsTextSelectionEnabled="True"
+						   Text="{x:Bind Text}" />
 
 			</Grid>
 		</DataTemplate>
 
 		<DataTemplate x:Key="DefaultDataTemplate">
 			<Border Background="Transparent">
-				<RichTextBlock VerticalAlignment="Center">
-					<Paragraph>
-						<Run FontFamily="Consolas"
-							 FontSize="15"
-							 Text="{Binding}" />
-					</Paragraph>
-				</RichTextBlock>
+				<TextBlock VerticalAlignment="Center"
+						   FontFamily="Consolas"
+						   IsTextSelectionEnabled="True"
+						   Text="{Binding}" />
 			</Border>
 		</DataTemplate>
 
 		<Style TargetType="ListViewItem">
 			<Setter Property="Padding" Value="0" />
+			<Setter Property="MinHeight" Value="0" />
+			<Setter Property="Margin" Value="0" />
 			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-			<Setter Property="VerticalContentAlignment" Value="Stretch" />
-			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="HorizontalAlignment" Value="Stretch" />
 		</Style>
 
 		<helpers:FileLineTemplateSelector x:Key="FileTemplateSelector"
@@ -153,6 +139,8 @@
 				  ItemTemplateSelector="{StaticResource FileTemplateSelector}"
 				  ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
 				  Loaded="ListViewLoaded"
+				  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+				  ScrollViewer.HorizontalScrollMode="Enabled"
 				  SelectionMode="None" />
 
 		<Grid x:Name="DragAndDropIconGrid" x:Load="{x:Bind IsDragAndDropPaneLoaded, Mode=OneWay}"

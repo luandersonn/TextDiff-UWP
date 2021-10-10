@@ -5,12 +5,13 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 	  xmlns:textdiff_uwp="using:TextDiff_UWP"
+	  d:Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
 	  muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
 	  mc:Ignorable="d">
 
 	<Page.Resources>
 		<Style x:Key="TitleBarButtonStyle"
-			   BasedOn="{StaticResource DefaultButtonStyle}"
+			   BasedOn="{StaticResource AccentButtonStyle}"
 			   TargetType="Button">
 			<Setter Property="Height" Value="32" />
 			<Setter Property="Width" Value="40" />
@@ -49,7 +50,7 @@
 
 		<!--#region TITLEBAR-->
 		<Border Grid.ColumnSpan="2"
-				Background="{ThemeResource SystemControlAcrylicElementBrush}"
+				Background="{ThemeResource SystemAltLowColor}"
 				BorderBrush="{ThemeResource SystemBaseLowColor}"
 				BorderThickness="0,0,0,1"
 				Canvas.ZIndex="1"
@@ -66,6 +67,7 @@
 		<Button Grid.Row="0"
 				Grid.Column="0"
 				Margin="4,0"
+				AutomationProperties.Name="Open file 1"
 				Click="OpenFileButtonClicked"
 				Content="&#xE8E5;"
 				Style="{StaticResource TitleBarButtonStyle}"
@@ -78,6 +80,7 @@
 				Grid.Column="0"
 				Margin="4,0"
 				HorizontalAlignment="Right"
+				AutomationProperties.Name="Change View"
 				Click="PanelChangeButtonClick"
 				Content="&#xEA61;"
 				Style="{StaticResource TitleBarButtonStyle}"
@@ -87,6 +90,7 @@
 		<Button Grid.Row="0"
 				Grid.Column="1"
 				Margin="4,0"
+				AutomationProperties.Name="Open file 2"
 				Click="OpenFileButtonClicked"
 				Content="&#xE8E5;"
 				Style="{StaticResource TitleBarButtonStyle}"
